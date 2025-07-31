@@ -99,10 +99,10 @@ Customer specifically wants to highlight these services: ${selectedServices.join
     let languageInstruction = "";
     switch (selectedLanguage) {
       case "English":
-        languageInstruction = "Write in natural English like a local customer would.";
+        languageInstruction = "Write the review entirely in natural English.";
         break;
       case "Gujarati":
-        languageInstruction = "`Write the review entirely in Gujarati. use English transliteration. Place business name naturally in middle or end of sentences, never at start.";
+        languageInstruction = "Write the review entirely in Gujarati. use English transliteration. Place business name naturally in middle or end of sentences, never at start.";
         break;
       case "Hindi":
         languageInstruction = "Write the review entirely in Hindi. use English transliteration. Place business name naturally in middle or end of sentences, never at start.";
@@ -222,8 +222,8 @@ Return only the review text, no quotes or extra formatting.`;
           `Outstanding ${type}! ${businessName} provides top-notch ${category.toLowerCase()} service.${serviceText} Five stars!`
         ],
         "Gujarati": [
-          `શાનદાર અનુભવ! વ્યાવસાયિક ${type} અને ઉત્તમ સેવા.${serviceText} ${category} માટે ભલામણ કરું છું.`,
-          `અપેક્ષાઓથી વધુ સારું! ગુણવત્તાયુક્ત સેવા અને મિત્રતાપૂર્ણ સ્ટાફ.${serviceText} ફરીથી આવીશ.`
+          `વ્યાવસાયિક ${type} અને ઉત્તમ સેવા.${serviceText} ${category} માટે ભલામણ કરું છું.`,
+          `ગુણવત્તાયુક્ત સેવા અને મિત્રતાપૂર્ણ સ્ટાફ.${serviceText} ફરીથી આવીશ.`
         ],
         "Hindi": [
           `${businessName} में बेहतरीन अनुभव! प्रोफेशनल ${type} और उत्कृष्ट सेवा.${serviceText} ${category} के लिए सिफारिश करता हूं.`,
@@ -253,7 +253,7 @@ Return only the review text, no quotes or extra formatting.`;
     const prompt = `Generate a catchy, professional tagline for "${businessName}" which is a ${type} in the ${category} category.
 
 Requirements:
-- Keep it under 8 words
+- Keep it under 80 words
 - Make it memorable and professional
 - Reflect the business type and category
 - Use action words or emotional appeal
