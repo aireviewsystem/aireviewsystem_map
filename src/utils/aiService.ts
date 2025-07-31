@@ -311,7 +311,7 @@ Return only the review text, no quotes or extra formatting.`;
     const prompt = `Generate a catchy, professional tagline for "${businessName}" which is a ${type} in the ${category} category.
 
 Requirements:
-- Keep it under 80 words
+- Keep it under 2 words
 - Make it memorable and professional
 - Reflect the business type and category
 - Use action words or emotional appeal
