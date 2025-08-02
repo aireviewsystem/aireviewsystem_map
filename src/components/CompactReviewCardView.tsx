@@ -271,7 +271,7 @@ export const CompactReviewCardView: React.FC<CompactReviewCardViewProps> = ({ ca
             </div>
             
             {/* Review Info */}
-            {currentReview && !isGenerating && (
+            {/* {currentReview && !isGenerating && (
               <div className="mt-4 p-3 bg-white/80 rounded-xl border border-gray-200">
                 <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2 text-gray-600">
@@ -297,7 +297,7 @@ export const CompactReviewCardView: React.FC<CompactReviewCardViewProps> = ({ ca
                   <span className="text-gray-500 font-mono">{currentReview.length} chars</span>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
           {/* Action Buttons */}
