@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { config } from './config';
+import { isSemanticallyDuplicate } from './semanticUtils';
 
 const genAI = config.isGeminiConfigured() 
   ? new GoogleGenerativeAI(config.ai.geminiApiKey)
@@ -26,6 +27,18 @@ export interface GeneratedReview {
 
 // Store used review hashes to prevent duplicates
 const usedReviewHashes = new Set<string>();
+
+const businessReviewHistory: Record<string, string[]> = {};
+
+function saveReviewToHistory(businessName: string, review: string) {
+  if (!businessReviewHistory[businessName]) businessReviewHistory[businessName] = [];
+  businessReviewHistory[businessName].unshift(review);
+  if (businessReviewHistory[businessName].length > 10) businessReviewHistory[businessName].pop();
+}
+
+function getBusinessHistory(businessName: string): string[] {
+  return businessReviewHistory[businessName] || [];
+}
 
 export class AIReviewService {
   private model = genAI?.getGenerativeModel({ model: 'gemini-2.0-flash' }) || null;
@@ -124,8 +137,19 @@ Customer specifically wants to highlight these services: ${selectedServices.join
       'Patient experience': 'Write from the perspective of a patient who received medical care or treatment.'
     };
 
+    const themes = [
+      "from the father's perspective",
+      "from a nurse’s point of view",
+      "as if reviewing a baby’s first check-up",
+      "emotional post-delivery moment",
+      "celebrating cleanliness & staff care"
+    ];
+    const selectedTheme = themes[Math.floor(Math.random() * themes.length)];
+
     for (let attempt = 0; attempt < maxRetries; attempt++) {
       const prompt = `Generate a realistic Google review for "${businessName}" which is a ${type} in the ${category} category.
+
+Theme: ${selectedTheme}
 
 Star Rating: ${starRating}/5
 Sentiment: ${sentimentGuide[starRating as keyof typeof sentimentGuide]}
@@ -134,11 +158,22 @@ Use Case: ${selectedUseCase} - ${useCaseInstructions[selectedUseCase]}
 ${highlights ? `Customer highlights: ${highlights}` : ''}
 ${serviceInstructions}
 
+Strict instructions:
+- Review must be between 150 and 200 characters.
+- No repetition of ideas or sentence structures.
+- Use fresh adjectives and sentence tone.
+
+Tone: Human, real, warm, and natural.
+
+
 Requirements:
 - Write 3-5 sentences maximum
 - First sentence always different
 - ${businessName} is shown always different place in review
 - Sound natural and human-like with regional authenticity
+- DO NOT repeat phrasing or meaning from previous reviews.
+- Avoid overused lines like "I felt safe", "highly recommend", "Dr. is amazing".
+- Mention 1 unique point in each review (like a specific nurse, or emotional detail).
 - Match the ${starRating}-star sentiment exactly
 - Be specific to the business type (${type}) and category (${category})
 - Use realistic customer language for ${selectedUseCase}
@@ -161,9 +196,21 @@ Return only the review text, no quotes or extra formatting.`;
         const response = await result.response;
         const reviewText = response.text().trim();
 
+        // Enforce character length (150–200)
+        if (reviewText.length < 150 || reviewText.length > 200) {
+          console.log(`Attempt ${attempt + 1}: Review length out of bounds (${reviewText.length}), retrying...`);
+          continue;
+        }
+
         // Check if review is unique
         if (this.isReviewUnique(reviewText)) {
           this.markReviewAsUsed(reviewText);
+          const history = getBusinessHistory(businessName);
+          if (await isSemanticallyDuplicate(reviewText, history)) {
+            console.log(`Attempt ${attempt + 1}: Semantically duplicate review, retrying...`);
+            continue;
+          }
+          saveReviewToHistory(businessName, reviewText);
           return {
             text: reviewText,
             hash: this.generateHash(reviewText),
@@ -250,6 +297,8 @@ Return only the review text, no quotes or extra formatting.`;
   // Generate tagline for business
   async generateTagline(businessName: string, category: string, type: string): Promise<string> {
     const prompt = `Generate a catchy, professional tagline for "${businessName}" which is a ${type} in the ${category} category.
+
+    
 
 Requirements:
 - Keep it under 8 words
