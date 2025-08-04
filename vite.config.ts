@@ -12,6 +12,13 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    exclude: [
+      'aws-sdk',
+      'mock-aws-s3',
+      'nock',
+      '@mapbox/node-pre-gyp',
+      '@mswjs/interceptors',
+      'lucide-react',
+    ],
   },
 });

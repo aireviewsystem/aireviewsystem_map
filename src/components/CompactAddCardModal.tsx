@@ -21,7 +21,6 @@ export const CompactAddCardModal: React.FC<CompactAddCardModalProps> = ({ onClos
     description: '',
     location: '',
     services: [] as string[],
-    services: [] as string[],
     logoUrl: '',
     googleMapsUrl: ''
   });
@@ -90,7 +89,6 @@ export const CompactAddCardModal: React.FC<CompactAddCardModalProps> = ({ onClos
         category: formData.category,
         type: formData.type,
         highlights: aiReviewData.highlights,
-        selectedServices: formData.services,
         selectedServices: formData.services,
         starRating: aiReviewData.starRating,
         language: aiReviewData.language,
@@ -167,7 +165,6 @@ export const CompactAddCardModal: React.FC<CompactAddCardModalProps> = ({ onClos
         type: formData.type.trim(),
         description: formData.description.trim(),
         location: formData.location.trim(),
-        services: formData.services,
         services: formData.services,
         slug: generateSlug(formData.businessName),
         logoUrl: formData.logoUrl,
