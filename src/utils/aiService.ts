@@ -103,10 +103,10 @@ Customer specifically wants to highlight these services: ${selectedServices.join
         languageInstruction = "Write the review strictly in English. Do not use any Gujarati or regional language words.";
         break;
       case "Gujarati":
-        languageInstruction = "Write the review strictly in Gujarati. Do not use any English or regional language words.";
+        languageInstruction = "Write in Gujarati language using English letters only (Romanized Gujarati).Do not use Gujarati script or Hindi script.Do not translate to English. Write natively in Roman Gujarati only.";
         break;
       case "Hindi":
-        languageInstruction = "Write the review strictly in Hindi. Do not use any English or regional language words.";
+        languageInstruction = "Write in Hindi language using English letters only (Romanized Gujarati).Do not use Gujarati script or Hindi script.Do not translate to English. Write natively in Roman Hindi only.";
         break;
     }
 
