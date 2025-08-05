@@ -111,7 +111,7 @@ export const CompactReviewCardView: React.FC<CompactReviewCardViewProps> = ({ ca
   const renderReviewText = () => {
     if (selectedLanguage.includes('+')) {
       // For mixed languages, try to split by sentences
-      const sentences = currentReview.split(/[।.!?]+/).filter(s => s.trim());
+      const sentences = currentReview.split(/[!.,]+/).filter(s => s.trim());
       return (
         <div className="space-y-2">
           {sentences.map((sentence, index) => (
@@ -125,7 +125,7 @@ export const CompactReviewCardView: React.FC<CompactReviewCardViewProps> = ({ ca
     
     return (
       <blockquote className="text-gray-800 text-sm leading-relaxed">
-        "{currentReview}"
+        {currentReview}
       </blockquote>
     );
   };

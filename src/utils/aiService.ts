@@ -156,7 +156,6 @@ ${highlights ? `Customer highlights: ${highlights}` : ""}
 ${serviceInstructions}
 
 Strict instructions:
-- Review must be between 150 and 200 characters.
 - No repetition of ideas or sentence structures.
 - Use fresh adjectives and sentence tone.
 Tone: Human, real, warm, and natural.
@@ -207,7 +206,7 @@ Return only the review text, no quotes or extra formatting.`;
         const reviewText = response.text().trim();
 
         // Enforce review length between 150 and 200 characters
-        if (reviewText.length < 150 || reviewText.length > 200) {
+        if (reviewText.length < 250 || reviewText.length > 300) {
           // Optionally, you can retry or trim/pad the review
           // Here, we simply retry by continuing the loop
           console.log(
