@@ -17,16 +17,16 @@ export const ServiceSelector: React.FC<ServiceSelectorProps> = ({
   size = 'md',
 }) => {
   const sizeClasses = {
-    sm: 'px-3 py-1.5 text-xs',
-    md: 'px-4 py-2 text-sm',
-    lg: 'px-6 py-3 text-base'
+    sm: 'px-2 py-1 text-xs',      // smaller padding and font
+    md: 'px-3 py-1.5 text-sm',    // moderate padding and font
+    lg: 'px-4 py-2 text-xs'     // keep large as is
   };
 
   const handleServiceToggle = (service: string) => {
     if (selectedServices.includes(service)) {
-      onSelectionChange(selectedServices.filter((s) => s !== service));
+      onSelectionChange([]);
     } else {
-      onSelectionChange([...selectedServices, service]);
+      onSelectionChange([service]);
     }
   };
 
@@ -56,56 +56,20 @@ export const ServiceSelector: React.FC<ServiceSelectorProps> = ({
             type="button"
             onClick={() => handleServiceToggle(service)}
             className={`
-              group relative ${sizeClasses[size]} font-light rounded-full
-              transition-all duration-300 ease-out transform
-              border-2 whitespace-nowrap min-w-0 flex items-center gap-2
-              hover:scale-105 active:scale-95
-              ${
-                isSelected(service)
-                  ? `
-                    bg-gradient-to-r from-blue-500 to-purple-600 
-                    text-white border-transparent shadow-lg
-                    hover:from-blue-600 hover:to-purple-700
-                    animate-pulse-gentle
-                  `
-                  : `
-                    bg-white text-gray-700 border-gray-200
-                    hover:border-purple-300 hover:bg-purple-50
-                    hover:text-purple-700 hover:shadow-md
-                  `
+              ${sizeClasses[size]}
+              rounded-full font-medium transition-all duration-200
+              border-2 whitespace-nowrap
+              ${isSelected(service)
+                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-transparent shadow-lg transform scale-105'
+                : 'bg-white text-gray-700 border-gray-300 hover:border-blue-400 hover:bg-blue-50'
               }
-              focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2
-              disabled:opacity-50 disabled:cursor-not-allowed
+              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+              active:transform active:scale-95
             `}
-            style={{
-              animationDelay: `${index * 100}ms`
-            }}
             aria-pressed={isSelected(service)}
-            role="checkbox"
+            role="radio"
           >
-            {/* Background animation */}
-            {isSelected(service) && (
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-20 animate-pulse"></div>
-            )}
-
-            {/* Service text */}
-            <span className="relative z-10 capitalize font-medium">
-              {service}
-            </span>
-
-            {/* Check icon */}
-            {isSelected(service) && (
-              <Check className="relative z-10 w-4 h-4 text-white animate-bounce-gentle" />
-            )}
-
-            {/* Hover overlay */}
-            <div className={`
-              absolute inset-0 rounded-full transition-opacity duration-300
-              ${isSelected(service) 
-                ? 'bg-white/10 opacity-0 group-hover:opacity-100' 
-                : 'bg-purple-100/50 opacity-0 group-hover:opacity-100'
-              }
-            `}></div>
+            {service}
           </button>
         ))}
       </div>
