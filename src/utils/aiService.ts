@@ -206,6 +206,16 @@ Return only the review text, no quotes or extra formatting.`;
         const response = await result.response;
         const reviewText = response.text().trim();
 
+        // Enforce review length between 150 and 200 characters
+        if (reviewText.length < 150 || reviewText.length > 200) {
+          // Optionally, you can retry or trim/pad the review
+          // Here, we simply retry by continuing the loop
+          console.log(
+            `Attempt ${attempt + 1}: Review length (${reviewText.length}) out of bounds, retrying...`
+          );
+          continue;
+        }
+
         // Check if review is unique
         if (this.isReviewUnique(reviewText)) {
           this.markReviewAsUsed(reviewText);
