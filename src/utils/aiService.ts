@@ -136,11 +136,14 @@ Strict instructions:
 - First sentence must always be different.
 - Use fresh adjectives and sentence tone.
 - Tone: Human, real, warm, and natural.
+- in gujarati starting line not write "Kem chho!"
+- not use exclamation mark
 
 Requirements:
 - ${businessName} is shown always different place in review
 - Sound natural and human-like with regional authenticity
-- DO NOT repeat phrasing or meaning from previous reviews.
+- DO NOT repeat phrasing or meaning from previous reviews
+- not write any place name in the review.
 - Avoid overused lines like "I felt safe", "highly recommend", "Dr. is amazing".
 - Mention 1 unique point in each review (emotional detail).
 - Match the ${starRating}-star sentiment exactly
