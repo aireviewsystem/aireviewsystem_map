@@ -217,7 +217,7 @@ export const CompactReviewCardView: React.FC<CompactReviewCardViewProps> = ({ ca
               />
             </div>
 
-            {showAdvanced && (
+            {/* {showAdvanced && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Tone</label>
                 <SegmentedButtonGroup
@@ -227,7 +227,7 @@ export const CompactReviewCardView: React.FC<CompactReviewCardViewProps> = ({ ca
                   size="sm"
                 />
               </div>
-            )}
+            )} */}
           </div>
 
           {/* Service Selection */}
@@ -240,7 +240,7 @@ export const CompactReviewCardView: React.FC<CompactReviewCardViewProps> = ({ ca
             />
           )}
 
-          {/* Advanced Options Toggle */}
+          {/* Advanced Options Toggle
           <div className="text-center mb-4">
             <button
               onClick={() => setShowAdvanced(!showAdvanced)}
@@ -248,7 +248,7 @@ export const CompactReviewCardView: React.FC<CompactReviewCardViewProps> = ({ ca
             >
               {showAdvanced ? 'Hide' : 'Show'} Advanced Options
             </button>
-          </div>
+          </div> */}
 
           {/* Review Text */}
           <div className="mb-8">
