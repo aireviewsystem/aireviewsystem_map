@@ -20,14 +20,14 @@ function App() {
     <Router>
       <Routes>
         {/* Login Route */}
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/ai-login" element={<LoginPage />} />
         
         {/* Home Route */}
         <Route path="/" element={<HomeLink />} />
         
         {/* Admin Dashboard Route */}
         <Route 
-          path="/admin" 
+          path="/ai-admin" 
           element={
             <ProtectedRoute>
               <AdminDashboard />

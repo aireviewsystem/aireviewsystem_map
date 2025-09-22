@@ -153,7 +153,7 @@ export const AdminDashboard: React.FC = () => {
 
   const handleLogout = () => {
     auth.logout();
-    window.location.href = '/login';
+    window.location.href = '/ai-login';
   };
 
   const getConnectionStatusDisplay = () => {
