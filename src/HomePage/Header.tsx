@@ -31,11 +31,11 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="w-14 h-14 bg-gradient-to-r from-blue-900 to-purple-900 rounded-xl flex items-center justify-center mr-3 relative overflow-hidden">
+            <div className="w-full h-full">
               <img 
-                src="/aireviewlogo.png" 
+                src="/arslogo.png" 
                 alt="AI Review System Logo" 
-                className="w-16 h-16 object-contain"
+                className="w-28 h-28 object-contain"
                 onError={(e) => {
                   // Fallback to Star icon if logo fails to load
                   e.currentTarget.style.display = 'none';
@@ -47,11 +47,11 @@ const Header = () => {
               />
               <Star className="w-6 h-6 text-white hidden" />
             </div>
-            <span className={`text-xl font-bold transition-colors ${
+            {/* <span className={`text-xl font-bold transition-colors ${
               isScrolled ? 'text-gray-900' : 'text-blue-700'
             }`}>
               AI Review System
-            </span>
+            </span> */}
           </div>
 
           {/* Desktop Navigation */}

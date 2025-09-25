@@ -25,11 +25,11 @@ const Footer = () => {
               <div className="space-y-3">
                 <div className="flex items-center text-gray-300">
                   <Mail className="w-5 h-5 mr-3 text-blue-400" />
-                  <span>hello@aireviewsystem.com</span>
+                  <span>aireviewsystem@gmail.com</span>
                 </div>
                 <div className="flex items-center text-gray-300">
                   <Phone className="w-5 h-5 mr-3 text-green-400" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 99099 08230</span>
                 </div>
                 <div className="flex items-center text-gray-300">
                   <MapPin className="w-5 h-5 mr-3 text-purple-400" />
@@ -110,7 +110,7 @@ const Footer = () => {
         <div className="container mx-auto px-6 py-6">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between">
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              © 2024 AI Review System. All rights reserved.
+              © 2025 AI Review System. All rights reserved.
             </div>
             
             {/* Social Links */}

@@ -2,6 +2,16 @@ import React from 'react';
 import { Star, ArrowRight, Play } from 'lucide-react';
 
 const Hero = () => {
+  const scrollToLeadForm = () => {
+    const leadFormElement = document.querySelector('#lead-form');
+    if (leadFormElement) {
+      leadFormElement.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <section className="relative bg-gradient-to-br from-blue-50 via-white to-green-50 pt-20 pb-16 overflow-hidden">
       {/* Background decoration */}
@@ -10,7 +20,7 @@ const Hero = () => {
       <div className="absolute bottom-20 left-10 w-72 h-72 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse delay-1000"></div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
             <div className="text-center lg:text-left">
@@ -29,12 +39,15 @@ const Hero = () => {
               
               {/* Subheadline */}
               <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl">
-                Turn happy customers into loyal promoters in just one tap — powered by smart AI-generated reviews that sound natural and authentic.
+                Turn happy customers into loyal promoters in just one tap - powered by smart AI-generated reviews that sound natural and authentic.
               </p>
               
-              {/* CTA Buttons */}
+              {/* CTA Buttons */} 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
-                <button className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center">
+                <button 
+                  onClick={scrollToLeadForm}
+                  className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center"
+                >
                   Book Free Demo
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -47,11 +60,21 @@ const Hero = () => {
               {/* Social Proof */}
               <div className="flex items-center justify-center lg:justify-start space-x-6 text-sm text-gray-500">
                 <div className="flex items-center">
-                  <div className="flex -space-x-2 mr-3">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className="w-8 h-8 bg-gradient-to-r from-blue-400 to-green-400 rounded-full border-2 border-white"></div>
+                    <div className="flex -space-x-2 mr-3">
+                    {[
+                      "https://randomuser.me/api/portraits/men/32.jpg",
+                      "https://randomuser.me/api/portraits/women/44.jpg",
+                      "https://randomuser.me/api/portraits/men/54.jpg",
+                      "https://randomuser.me/api/portraits/women/65.jpg"
+                    ].map((src, i) => (
+                      <img
+                      key={i}
+                      src={src}
+                      alt={`User ${i + 1}`}
+                      className="w-8 h-8 rounded-full border-2 border-white object-cover"
+                      />
                     ))}
-                  </div>
+                    </div>
                   <span>500+ businesses trust us</span>
                 </div>
                 <div className="flex items-center">

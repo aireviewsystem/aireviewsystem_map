@@ -66,7 +66,7 @@ const LeadForm = () => {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-r from-blue-600 to-green-600">
+    <section id="lead-form" className="py-20 bg-gradient-to-r from-blue-600 to-green-600">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -95,10 +95,7 @@ const LeadForm = () => {
                 ))}
               </div>
               
-              <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
-                <p className="text-lg font-semibold mb-2">⚡ Limited Time Offer</p>
-                <p className="opacity-90">Get 3 months free when you sign up during your demo call!</p>
-              </div>
+              
             </div>
             
             {/* Right Column - Form */}
