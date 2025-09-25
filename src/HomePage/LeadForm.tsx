@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 
 const LeadForm = () => {
@@ -25,8 +25,24 @@ const LeadForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+    const { name, phone, businessName, businessType, city } = formData;
+    // Build a neat WhatsApp message
+    const messageLines = [
+      'New Demo Request',
+      '',
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Business Name: ${businessName}`,
+      `Business Type: ${businessType}`,
+      `City: ${city}`,
+    ];
+    const message = messageLines.join('\n');
+    const encoded = encodeURIComponent(message);
+    const phoneTarget = '919909908230'; // +91 99099 08230
+    const waUrl = `https://wa.me/${phoneTarget}?text=${encoded}`;
+
+    // Open WhatsApp in a new tab; if blocked, still mark submitted
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
     setIsSubmitted(true);
   };
 
@@ -111,12 +127,13 @@ const LeadForm = () => {
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
                     Full Name *
                   </label>
                   <input
                     type="text"
                     name="name"
+                    id="fullName"
                     required
                     value={formData.name}
                     onChange={handleChange}
@@ -126,12 +143,13 @@ const LeadForm = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="phoneNumber" className="block text-sm font-semibold text-gray-700 mb-2">
                     Phone Number *
                   </label>
                   <input
                     type="tel"
                     name="phone"
+                    id="phoneNumber"
                     required
                     value={formData.phone}
                     onChange={handleChange}
@@ -141,12 +159,13 @@ const LeadForm = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="businessName" className="block text-sm font-semibold text-gray-700 mb-2">
                     Business Name *
                   </label>
                   <input
                     type="text"
                     name="businessName"
+                    id="businessName"
                     required
                     value={formData.businessName}
                     onChange={handleChange}
@@ -156,11 +175,12 @@ const LeadForm = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="businessType" className="block text-sm font-semibold text-gray-700 mb-2">
                     Type of Business *
                   </label>
                   <select
                     name="businessType"
+                    id="businessType"
                     required
                     value={formData.businessType}
                     onChange={handleChange}
@@ -174,12 +194,13 @@ const LeadForm = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="city" className="block text-sm font-semibold text-gray-700 mb-2">
                     City *
                   </label>
                   <input
                     type="text"
                     name="city"
+                    id="city"
                     required
                     value={formData.city}
                     onChange={handleChange}
