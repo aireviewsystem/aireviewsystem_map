@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 
 const FAQ = () => {
@@ -111,12 +111,20 @@ const FAQ = () => {
                 Our team is here to help! Get in touch and we'll answer any questions about our AI Review System.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-shadow">
+                <a
+                  href="tel:9909908230"
+                  className="bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-shadow flex items-center justify-center"
+                >
                   📞 Schedule a Call
-                </button>
-                <button className="bg-white text-gray-700 px-8 py-3 rounded-xl font-semibold border-2 border-gray-200 hover:border-gray-300 transition-colors">
+                </a>
+                <a
+                  href="https://wa.me/919909908230?text=Hi%21%20I%27m%20interested%20in%20AI%20Review%20System%20for%20my%20business."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-gray-700 px-8 py-3 rounded-xl font-semibold border-2 border-gray-200 hover:border-gray-300 transition-colors flex items-center justify-center"
+                >
                   💬 Live Chat Support
-                </button>
+                </a>
               </div>
             </div>
           </div>

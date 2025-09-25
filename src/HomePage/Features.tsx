@@ -1,7 +1,25 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { Star, Globe, Copy, QrCode, Smartphone, RefreshCw } from 'lucide-react';
 
 const Features = () => {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+
+  // Close modal on ESC and lock scroll when open
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsVideoOpen(false);
+    };
+    if (isVideoOpen) {
+      window.addEventListener('keydown', onKeyDown);
+      const original = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        window.removeEventListener('keydown', onKeyDown);
+        document.body.style.overflow = original;
+      };
+    }
+    return () => {};
+  }, [isVideoOpen]);
   const features = [
     {
       icon: <Star className="w-6 h-6" />,
@@ -29,8 +47,8 @@ const Features = () => {
     },
     {
       icon: <Smartphone className="w-6 h-6" />,
-      title: "Mobile Optimized",
-      description: "Perfect mobile experience for customers to leave reviews on-the-go",
+      title: "SEO Ranking",
+      description: "Boost your Google My Business (GMB) ranking with more frequent, high-quality reviews that improve your local search visibility.",
       color: "from-indigo-500 to-blue-500"
     },
     {
@@ -88,16 +106,54 @@ const Features = () => {
               Watch how our AI generates natural, authentic reviews that help your business grow its online reputation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center">
+              <button onClick={() => setIsVideoOpen(true)} className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center">
                 📱 View Live Demo
               </button>
-              <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 flex items-center justify-center">
-                📞 Schedule Call
-              </button>
+                <a
+                href="tel:+919909908230"
+                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 flex items-center justify-center"
+                >
+                📞 Call Now
+                </a>
             </div>
           </div>
         </div>
       </div>
+      {/* Video Lightbox Modal */}
+      {isVideoOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          onClick={() => setIsVideoOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Watch demo video"
+        >
+          <div
+            className="relative w-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute -top-10 right-0 sm:top-3 sm:right-3 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white hover:scale-105 transition"
+              onClick={() => setIsVideoOpen(false)}
+              aria-label="Close video"
+            >
+              {/* using an emoji X to avoid importing new icon here */}
+              ✖
+            </button>
+            {/* 9:16 Responsive Video Wrapper sized by viewport height for desktops */}
+            <div className="relative aspect-[9/16] h-[70vh] sm:h-[75vh] md:h-[85vh] max-h-[900px] rounded-2xl overflow-hidden bg-gray-900 shadow-2xl border border-white/10">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/F-CwRTHFzPM?autoplay=1&rel=0&modestbranding=1"
+                title="AI Review System - Demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

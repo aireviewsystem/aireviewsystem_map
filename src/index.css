@@ -78,6 +78,24 @@
   50% { transform: scale(1.05); }
 }
 
+/* Marquee for testimonials */
+@keyframes marquee-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee {
+  overflow: hidden;
+}
+
+.marquee-track {
+  animation: marquee-x 40s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
 /* Animation Classes */
 .animate-spin-continuous {
   animation: spin-continuous 4s linear infinite;

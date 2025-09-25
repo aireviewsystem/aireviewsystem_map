@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Star, Menu, X, ArrowRight } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const scrollToLeadForm = () => {
+    const leadFormElement = document.querySelector('#lead-form');
+    if (leadFormElement) {
+      leadFormElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,25 +34,25 @@ const Header = () => {
         ? 'bg-white/95 backdrop-blur-md shadow-lg' 
         : 'bg-transparent'
     }`}>
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-0">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="w-full h-full">
+            <div className="flex items-center w-44 h-26">
               <img 
-                src="/arslogo.png" 
-                alt="AI Review System Logo" 
-                className="w-28 h-28 object-contain"
-                onError={(e) => {
-                  // Fallback to Star icon if logo fails to load
-                  e.currentTarget.style.display = 'none';
-                  const starIcon = e.currentTarget.nextElementSibling as HTMLElement;
-                  if (starIcon) {
-                    starIcon.style.display = 'block';
-                  }
-                }}
+              src="/arslogo.png" 
+              alt="AI Review System Logo" 
+              className="w-[280px] h-[180px] object-contain"
+              onError={(e) => {
+                // Fallback to Star icon if logo fails to load
+                e.currentTarget.style.display = 'none';
+                const starIcon = e.currentTarget.nextElementSibling as HTMLElement;
+                if (starIcon) {
+                starIcon.style.display = 'block';
+                }
+              }}
               />
-              <Star className="w-6 h-6 text-white hidden" />
+              <Star className="w-8 h-8 text-blue-700 hidden" />
             </div>
             {/* <span className={`text-xl font-bold transition-colors ${
               isScrolled ? 'text-gray-900' : 'text-blue-700'
@@ -71,14 +78,14 @@ const Header = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <button className={`px-6 py-2 rounded-xl font-semibold transition-all ${
+            {/* <button className={`px-6 py-2 rounded-xl font-semibold transition-all ${
               isScrolled 
                 ? 'text-gray-700 hover:text-blue-600' 
                 : 'text-white hover:text-blue-200'
             }`}>
               Login
-            </button>
-            <button className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white px-6 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center">
+            </button> */}
+            <button onClick={scrollToLeadForm} className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white px-6 py-2 mr-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center">
               Get Demo
               <ArrowRight className="ml-2 w-4 h-4" />
             </button>
@@ -113,7 +120,14 @@ const Header = () => {
                 <button className="block w-full text-left text-gray-700 font-medium hover:text-blue-600 transition-colors">
                   Login
                 </button>
-                <button className="w-full bg-gradient-to-r from-blue-600 to-green-600 text-white py-3 rounded-xl font-semibold flex items-center justify-center">
+                <button
+                  className="w-full bg-gradient-to-r from-blue-600 to-green-600 text-white py-3 rounded-xl font-semibold flex items-center justify-center"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    // slight delay to allow menu to close animation before scrolling
+                    setTimeout(() => scrollToLeadForm(), 50);
+                  }}
+                >
                   Get Demo
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </button>

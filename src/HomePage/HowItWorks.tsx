@@ -39,7 +39,7 @@ const HowItWorks = () => {
               How It Works
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get more Google reviews in 4 simple steps. No technical knowledge required — just share and watch your reviews grow!
+              Get more Google reviews in 4 simple steps.<br/> No technical knowledge required just share and watch your reviews grow!
             </p>
           </div>
 

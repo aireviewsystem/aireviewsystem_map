@@ -1,7 +1,9 @@
-import React from 'react';
-import { Star, ArrowRight, Play } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Star, ArrowRight, Play, X } from 'lucide-react';
 
 const Hero = () => {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+
   const scrollToLeadForm = () => {
     const leadFormElement = document.querySelector('#lead-form');
     if (leadFormElement) {
@@ -12,6 +14,24 @@ const Hero = () => {
     }
   };
 
+  // Close modal on ESC and lock scroll when open
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsVideoOpen(false);
+    };
+    if (isVideoOpen) {
+      window.addEventListener('keydown', onKeyDown);
+      // lock body scroll
+      const original = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        window.removeEventListener('keydown', onKeyDown);
+        document.body.style.overflow = original;
+      };
+    }
+    return () => {};
+  }, [isVideoOpen]);
+
   return (
     <section className="relative bg-gradient-to-br from-blue-50 via-white to-green-50 pt-20 pb-16 overflow-hidden">
       {/* Background decoration */}
@@ -20,7 +40,7 @@ const Hero = () => {
       <div className="absolute bottom-20 left-10 w-72 h-72 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse delay-1000"></div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto mt-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
             <div className="text-center lg:text-left">
@@ -31,10 +51,13 @@ const Hero = () => {
               </div>
               
               {/* Main Headline */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-0 leading-tight">
+                Get More 
+ </h1>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Get More Google Reviews
-                <span className="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent"> Effortlessly</span>
-                <span className="block">with AI</span>
+                Google Reviews
+                
+                <span className="block"><span className="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent"> Effortlessly</span> with AI</span>
               </h1>
               
               {/* Subheadline */}
@@ -46,12 +69,12 @@ const Hero = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
                 <button 
                   onClick={scrollToLeadForm}
-                  className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center"
+                  className="group bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-600 hover:to-green-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center"
                 >
                   Book Free Demo
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <button className="group bg-white hover:bg-gray-50 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 flex items-center justify-center">
+                <button onClick={() => setIsVideoOpen(true)} className="group bg-white hover:bg-gray-50 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 flex items-center justify-center">
                   <Play className="mr-2 w-5 h-5" />
                   Watch Demo
                 </button>
@@ -136,6 +159,40 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      {/* Video Lightbox Modal */}
+      {isVideoOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          onClick={() => setIsVideoOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Watch demo video"
+        >
+          <div
+            className="relative w-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute -top-10 right-0 sm:top-3 sm:right-3 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white hover:scale-105 transition"
+              onClick={() => setIsVideoOpen(false)}
+              aria-label="Close video"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            {/* 9:16 Responsive Video Wrapper sized by viewport height for desktops */}
+            <div className="relative aspect-[9/16] h-[70vh] sm:h-[75vh] md:h-[85vh] max-h-[900px] rounded-2xl overflow-hidden bg-gray-900 shadow-2xl border border-white/10">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/F-CwRTHFzPM?autoplay=1&rel=0&modestbranding=1"
+                title="AI Review System - Demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

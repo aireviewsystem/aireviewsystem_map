@@ -63,7 +63,7 @@ const Industries = () => {
               Industries We Serve
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our AI Review System works perfectly for any local business. Customized review generation for every industry.
+              Our AI Review System works perfectly for any local business.<br/> Customized review generation for every industry.
             </p>
           </div>
 
