@@ -1,4 +1,4 @@
-import React from 'react';
+// ...existing code...
 import { QrCode, Star, Copy, Share2 } from 'lucide-react';
 
 const HowItWorks = () => {
@@ -30,7 +30,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+  <section id="how-it-works" className="py-20 bg-white">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}

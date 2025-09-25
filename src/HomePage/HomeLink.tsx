@@ -1,10 +1,10 @@
-import React from 'react';
 import Header from './Header';
 import Hero from './Hero';
 import HowItWorks from './HowItWorks';
 import Industries from './Industries';
 import Features from './Features';
 import Testimonials from './Testimonials';
+import Pricing from './Pricing';
 import LeadForm from './LeadForm';
 import FAQ from './FAQ';
 import Footer from './Footer';
@@ -26,6 +26,9 @@ function HomeLink() {
         </section>
         <section id="testimonials">
           <Testimonials />
+        </section>
+        <section id="pricing">
+          <Pricing />
         </section>
         <LeadForm />
         <section id="faq">

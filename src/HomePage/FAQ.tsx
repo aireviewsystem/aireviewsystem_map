@@ -52,11 +52,39 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section id="faq" className="py-20 bg-white">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
+    {/* Bottom CTA */}
+          <div className="text-center mt-6">
+            <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Still Have Questions?
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Our team is here to help! Get in touch and we'll answer any questions about our AI Review System.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="tel:9909908230"
+                  className="bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-shadow flex items-center justify-center"
+                >
+                  📞 Schedule a Call
+                </a>
+                <a
+                  href="https://wa.me/919909908230?text=Hi%21%20I%27m%20interested%20in%20AI%20Review%20System%20for%20my%20business."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-gray-700 px-8 py-3 rounded-xl font-semibold border-2 border-gray-200 hover:border-gray-300 transition-colors flex items-center justify-center"
+                >
+                  💬 Live Chat Support
+                </a>
+              </div>
+            </div>
+          </div>
+
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mt-10">
             <div className="inline-flex items-center bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
               ❓ Frequently Asked Questions
             </div>
@@ -64,12 +92,12 @@ const FAQ = () => {
               Got Questions? We've Got Answers
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Everything you need to know about our AI Review System. Can't find what you're looking for? Contact our support team!
+              Everything you need to know about our AI Review System. <br/> Can't find what you're looking for? Contact our support team!
             </p>
           </div>
 
           {/* FAQ Items */}
-          <div className="space-y-4">
+          <div className="space-y-4 mt-8">
             {faqs.map((faq, index) => (
               <div key={index} className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:border-blue-200 transition-colors duration-300">
                 <button
@@ -101,33 +129,7 @@ const FAQ = () => {
             ))}
           </div>
 
-          {/* Bottom CTA */}
-          <div className="text-center mt-16">
-            <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Still Have Questions?
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Our team is here to help! Get in touch and we'll answer any questions about our AI Review System.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="tel:9909908230"
-                  className="bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-shadow flex items-center justify-center"
-                >
-                  📞 Schedule a Call
-                </a>
-                <a
-                  href="https://wa.me/919909908230?text=Hi%21%20I%27m%20interested%20in%20AI%20Review%20System%20for%20my%20business."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white text-gray-700 px-8 py-3 rounded-xl font-semibold border-2 border-gray-200 hover:border-gray-300 transition-colors flex items-center justify-center"
-                >
-                  💬 Live Chat Support
-                </a>
-              </div>
-            </div>
-          </div>
+      
         </div>
       </div>
     </section>

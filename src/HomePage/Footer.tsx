@@ -1,4 +1,5 @@
-import { Star, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import type { MouseEvent } from 'react';
 
 const Footer = () => {
   return (
@@ -10,10 +11,12 @@ const Footer = () => {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="flex items-center mb-6">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-green-500 rounded-xl flex items-center justify-center mr-3">
-                  <Star className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-2xl font-bold">AI Review System</span>
+                <img
+                  src="/arslogo1.png"
+                  alt="AI Review System Logo"
+                  className="w-[160px] h-full mr-1"
+                />
+                {/* <span className="text-2xl font-bold">AI Review System</span> */}
               </div>
               <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
                 Helping local businesses grow their online reputation with AI-powered review generation. 
@@ -41,39 +44,83 @@ const Footer = () => {
             <div>
               <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
               <ul className="space-y-3">
-                {[
-                  'How It Works',
-                  'Industries',
-                  'Features',
-                  'Pricing',
-                  'Demo',
-                  'Support'
-                ].map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      {link}
-                    </a>
-                  </li>
-                ))}
+                {(() => {
+                  const handleDemoClick = (e: MouseEvent<HTMLAnchorElement>) => {
+                    if (typeof window === 'undefined') return;
+                    if (window.location.pathname === '/') {
+                      e.preventDefault();
+                      const el = document.getElementById('lead-form');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    // If not on home, allow navigation to '/#lead-form' via href
+                  };
+
+                  const handleFeaturesClick = (e: MouseEvent<HTMLAnchorElement>) => {
+                    if (typeof window === 'undefined') return;
+                    if (window.location.pathname === '/') {
+                      e.preventDefault();
+                      const el = document.getElementById('features');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  };
+
+                  const links: Array<{ label: string; href: string; onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void }>= [
+                    { label: 'How It Works', href: '/#how-it-works', onClick: (e) => {
+                      if (typeof window === 'undefined') return;
+                      if (window.location.pathname === '/') {
+                        e.preventDefault();
+                        const el = document.getElementById('how-it-works');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    } },
+                      { label: 'Industries', href: '/#industries', onClick: (e) => {
+                        if (typeof window === 'undefined') return;
+                        if (window.location.pathname === '/') {
+                          e.preventDefault();
+                          const el = document.getElementById('industries');
+                          if (el) el.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      } },
+                    { label: 'Features', href: '/#features', onClick: handleFeaturesClick },
+                    { label: 'Pricing', href: '/#pricing', onClick: (e) => {
+                      if (typeof window === 'undefined') return;
+                      if (window.location.pathname === '/') {
+                        e.preventDefault();
+                        const el = document.getElementById('pricing');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    } },
+                    { label: 'Demo', href: '/#lead-form', onClick: handleDemoClick },
+                    { label: 'Contact Us', href: '/#faq', onClick: (e) => {
+                      if (typeof window === 'undefined') return;
+                      if (window.location.pathname === '/') {
+                        e.preventDefault();
+                        const el = document.getElementById('faq');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    } }
+                  ];
+
+                  return links.map((item) => (
+                    <li key={item.label}>
+                      <a
+                        href={item.href}
+                        onClick={item.onClick}
+                        className="text-gray-300 hover:text-white transition-colors duration-300"
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ));
+                })()}
               </ul>
             </div>
-            
-            {/* Resources */}
+
+{/* Resources */}
             <div>
-              <h3 className="text-lg font-semibold mb-6">Resources</h3>
+              <h3 className="text-lg font-semibold mb-6">Policies</h3>
               <ul className="space-y-3">
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Blog</a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Case Studies</a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Help Center</a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">API Documentation</a>
-                </li>
+               
                 <li>
                   <a href="/privacy-policy" className="text-gray-300 hover:text-white transition-colors duration-300">Privacy Policy</a>
                 </li>
@@ -82,6 +129,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
+           
           </div>
           
           {/* Newsletter Signup */}

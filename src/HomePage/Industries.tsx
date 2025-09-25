@@ -1,4 +1,4 @@
-import React from 'react';
+// ...existing code...
 import { Utensils, Heart, Scissors, ShoppingBag, Car, Home, Dumbbell, GraduationCap } from 'lucide-react';
 
 const Industries = () => {
@@ -54,7 +54,7 @@ const Industries = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section id="industries" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Shield, Cookie, Database, Info, Home, ChevronUp } from 'lucide-react';
+import Footer from './Footer';
 
 const PrivacyPolicy = () => {
   return (
@@ -140,6 +141,7 @@ const PrivacyPolicy = () => {
           </section>
         </div>
       </div>
+      <Footer />
     </main>
   );
 };
