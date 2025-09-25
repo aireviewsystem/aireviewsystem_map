@@ -1,4 +1,3 @@
-import React from 'react';
 import { Star, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const Footer = () => {
@@ -63,20 +62,24 @@ const Footer = () => {
             <div>
               <h3 className="text-lg font-semibold mb-6">Resources</h3>
               <ul className="space-y-3">
-                {[
-                  'Blog',
-                  'Case Studies',
-                  'Help Center',
-                  'API Documentation',
-                  'Privacy Policy',
-                  'Terms of Service'
-                ].map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                      {link}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Blog</a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Case Studies</a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Help Center</a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">API Documentation</a>
+                </li>
+                <li>
+                  <a href="/privacy-policy" className="text-gray-300 hover:text-white transition-colors duration-300">Privacy Policy</a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Terms of Service</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -116,14 +119,16 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex items-center space-x-4">
               {[
-                { icon: Facebook, href: '#' },
-                { icon: Twitter, href: '#' },
-                { icon: Instagram, href: '#' },
-                { icon: Linkedin, href: '#' }
+                { icon: Facebook, href: '#', label: 'Facebook' },
+                { icon: Twitter, href: '#', label: 'Twitter' },
+                { icon: Instagram, href: '#', label: 'Instagram' },
+                { icon: Linkedin, href: '#', label: 'LinkedIn' }
               ].map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
+                  aria-label={social.label}
+                  title={social.label}
                   className="w-10 h-10 bg-gray-800 hover:bg-gradient-to-r hover:from-blue-600 hover:to-green-600 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:scale-110"
                 >
                   <social.icon className="w-5 h-5 text-gray-400 hover:text-white" />

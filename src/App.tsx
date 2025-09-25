@@ -8,6 +8,8 @@ import { LoginPage } from './components/LoginPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { storage } from './utils/storage';
 import HomeLink from './HomePage/HomeLink';
+import PrivacyPolicy from './HomePage/PrivacyPolicy';
+import type { ReviewCard } from './types';
 
 ReactGA.initialize("G-J7T5QPZPQ9"); // your measurement ID
 
@@ -24,6 +26,7 @@ function App() {
         
         {/* Home Route */}
         <Route path="/" element={<HomeLink />} />
+  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         
         {/* Admin Dashboard Route */}
         <Route 
@@ -47,14 +50,14 @@ function App() {
 
 // Component to handle dynamic review card routing
 const DynamicReviewCard: React.FC = () => {
-  const [card, setCard] = React.useState(null);
+  const [card, setCard] = React.useState<ReviewCard | null>(null);
   const [loading, setLoading] = React.useState(true);
   const slug = window.location.pathname.slice(1); // Remove leading slash
 
   React.useEffect(() => {
     const loadCard = async () => {
       try {
-        const foundCard = await storage.getCardBySlug(slug);
+  const foundCard: ReviewCard | null = await storage.getCardBySlug(slug);
         setCard(foundCard);
       } catch (error) {
         console.error('Error loading card:', error);

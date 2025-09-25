@@ -7,7 +7,9 @@ const LeadForm = () => {
     phone: '',
     businessName: '',
     businessType: '',
-    city: ''
+    city: '',
+    businessDescription: '',
+    businessServices: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -25,17 +27,27 @@ const LeadForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const { name, phone, businessName, businessType, city } = formData;
+    const { name, phone, businessName, businessType, city, businessDescription, businessServices } = formData;
     // Build a neat WhatsApp message
-    const messageLines = [
+    const messageLines: string[] = [
       'New Demo Request',
       '',
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      `Business Name: ${businessName}`,
-      `Business Type: ${businessType}`,
-      `City: ${city}`,
+      `☞ Name: ${name}`,
+      `☞ Phone: ${phone}`,
+      `☞ Business Name: ${businessName}`,
+      `☞ Business Type: ${businessType}`,
+      `☞ City: ${city}`,
     ];
+    if (businessDescription?.trim()) {
+      messageLines.push(`☞ Business Description: ${businessDescription.trim()}`);
+    }
+    if (businessServices?.trim()) {
+      const services = businessServices.split(',').map(s => s.trim()).filter(Boolean);
+      if (services.length) {
+        messageLines.push('☞ Business Services:');
+        services.forEach(s => messageLines.push(`- ${s}`));
+      }
+    }
     const message = messageLines.join('\n');
     const encoded = encodeURIComponent(message);
     const phoneTarget = '919909908230'; // +91 99099 08230
@@ -46,7 +58,7 @@ const LeadForm = () => {
     setIsSubmitted(true);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -126,72 +138,107 @@ const LeadForm = () => {
               </div>
               
               <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-1">
+                    <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="fullName"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label htmlFor="phoneNumber" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      id="phoneNumber"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      placeholder="+91 98765 43210"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-1">
+                    <label htmlFor="businessName" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Business Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="businessName"
+                      id="businessName"
+                      required
+                      value={formData.businessName}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      placeholder="Your business name"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label htmlFor="businessType" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Type of Business *
+                    </label>
+                    <select
+                      name="businessType"
+                      id="businessType"
+                      required
+                      value={formData.businessType}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    >
+                      <option value="">Select your business type</option>
+                      {businessTypes.map((type) => (
+                        <option key={type} value={type}>{type}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                
+                {/* Business Services (comma-separated) */}
                 <div>
-                  <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Full Name *
+                  <label htmlFor="businessServices" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Business Services
                   </label>
                   <input
                     type="text"
-                    name="name"
-                    id="fullName"
-                    required
-                    value={formData.name}
+                    name="businessServices"
+                    id="businessServices"
+                    value={formData.businessServices}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                    placeholder="Enter your full name"
+                    placeholder="e.g., Haircut, Facial, Spa, Massage"
+                  />
+                  <p className="mt-1 text-xs text-gray-500">Add multiple services separated by commas.</p>
+                </div>
+
+                {/* Business Description */}
+                <div>
+                  <label htmlFor="businessDescription" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Business Description
+                  </label>
+                  <textarea
+                    name="businessDescription"
+                    id="businessDescription"
+                    rows={4}
+                    value={formData.businessDescription}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-y"
+                    placeholder="Tell us briefly about your business, services, customers, and goals"
                   />
                 </div>
-                
-                <div>
-                  <label htmlFor="phoneNumber" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    id="phoneNumber"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                    placeholder="+91 98765 43210"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="businessName" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Business Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="businessName"
-                    id="businessName"
-                    required
-                    value={formData.businessName}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                    placeholder="Your business name"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="businessType" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Type of Business *
-                  </label>
-                  <select
-                    name="businessType"
-                    id="businessType"
-                    required
-                    value={formData.businessType}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                  >
-                    <option value="">Select your business type</option>
-                    {businessTypes.map((type) => (
-                      <option key={type} value={type}>{type}</option>
-                    ))}
-                  </select>
-                </div>
+
                 
                 <div>
                   <label htmlFor="city" className="block text-sm font-semibold text-gray-700 mb-2">
