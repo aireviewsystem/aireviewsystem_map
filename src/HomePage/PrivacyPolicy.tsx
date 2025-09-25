@@ -118,7 +118,7 @@ const PrivacyPolicy = () => {
               </p>
               <p id="contact" className="text-gray-700 mt-3">
                 If you have any concerns, feel free to contact us at: {' '}
-                <a className="text-blue-600 underline decoration-blue-300 hover:text-blue-700" href="mailto:support@aireviewsystem.com">support@aireviewsystem.com</a>
+                <a className="text-blue-600 underline decoration-blue-300 hover:text-blue-700" href="mailto:aireviewsystem@gmail.com">aireviewsystem@gmail.com</a>
               </p>
             </article>
 

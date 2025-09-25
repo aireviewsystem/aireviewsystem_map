@@ -53,6 +53,23 @@ const LeadForm = () => {
     const phoneTarget = '919909908230'; // +91 99099 08230
     const waUrl = `https://wa.me/${phoneTarget}?text=${encoded}`;
 
+    // Fire-and-forget: send lead to our API (append to Google Sheets)
+    try {
+      fetch('/api/add-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          phone,
+          businessName,
+          businessType,
+          city,
+          businessDescription,
+          businessServices
+        })
+      }).catch(() => { /* ignore */ });
+    } catch { /* ignore */ }
+
     // Open WhatsApp in a new tab; if blocked, still mark submitted
     window.open(waUrl, '_blank', 'noopener,noreferrer');
     setIsSubmitted(true);
