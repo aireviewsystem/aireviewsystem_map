@@ -117,9 +117,9 @@ const Header = () => {
                 </a>
               ))}
               <div className="pt-4 border-t border-gray-200 space-y-3">
-                <button className="block w-full text-left text-gray-700 font-medium hover:text-blue-600 transition-colors">
+                {/* <button className="block w-full text-left text-gray-700 font-medium hover:text-blue-600 transition-colors">
                   Login
-                </button>
+                </button> */}
                 <button
                   className="w-full bg-gradient-to-r from-blue-600 to-green-600 text-white py-3 rounded-xl font-semibold flex items-center justify-center"
                   onClick={() => {
