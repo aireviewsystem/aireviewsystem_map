@@ -9,6 +9,8 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import { storage } from './utils/storage';
 import HomeLink from './HomePage/HomeLink';
 import PrivacyPolicy from './HomePage/PrivacyPolicy';
+import TermsConditions from './HomePage/TermsConditions';
+import RefundPolicy from './HomePage/RefundPolicy';
 import type { ReviewCard } from './types';
 
 ReactGA.initialize("G-J7T5QPZPQ9"); // your measurement ID
@@ -26,7 +28,9 @@ function App() {
         
         {/* Home Route */}
         <Route path="/" element={<HomeLink />} />
-  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+  <Route path="/terms" element={<TermsConditions />} />
+  <Route path="/refund-policy" element={<RefundPolicy />} />
         
         {/* Admin Dashboard Route */}
         <Route 

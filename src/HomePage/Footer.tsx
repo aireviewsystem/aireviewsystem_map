@@ -125,7 +125,10 @@ const Footer = () => {
                   <a href="/privacy-policy" className="text-gray-300 hover:text-white transition-colors duration-300">Privacy Policy</a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Terms of Service</a>
+                  <a href="/terms" className="text-gray-300 hover:text-white transition-colors duration-300">Terms &amp; Conditions</a>
+                </li>
+                <li>
+                  <a href="/refund-policy" className="text-gray-300 hover:text-white transition-colors duration-300">Refund &amp; Cancellation</a>
                 </li>
               </ul>
             </div>
